@@ -1,0 +1,36 @@
+body {
+    background-color: #86f8d2;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.selections {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.selection {
+    font-size: 40px;
+    cursor: pointer;
+    transition: 100ms;
+    
+}
+.selection:hover {
+    transform: scale(1.2);
+}
+
+.results {
+    margin-top: 20px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    font-size: 30px;
+}
