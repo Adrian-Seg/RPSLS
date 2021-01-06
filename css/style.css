@@ -3,6 +3,7 @@ body {
     
 }
 
+/* INDEX PAGE */
 .title {
     font-family: 'Audiowide', cursive;
     font-size: 40px;
@@ -12,6 +13,24 @@ body {
     justify-content: center;
 }
 
+.pickOpponent {
+    font-family: 'Audiowide', cursive;
+    padding-top: 20px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.difficulties, .restart {
+    font-family: 'Audiowide', cursive;
+    padding-top: 20px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* GAME PAGE */
 .selections {
     display: flex;
     justify-content: center;
