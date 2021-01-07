@@ -3,7 +3,6 @@ body {
     
 }
 
-/* INDEX PAGE */
 .title {
     font-family: 'Audiowide', cursive;
     font-size: 40px;
@@ -13,7 +12,9 @@ body {
     justify-content: center;
 }
 
-.pickOpponent {
+/* MAIN PAGE */
+
+.pickOpponent, .numOfRounds {
     font-family: 'Audiowide', cursive;
     padding-top: 20px;
     font-size: 40px;
@@ -22,7 +23,7 @@ body {
     justify-content: space-around;
 }
 
-.numOfRounds, .restart {
+.restart {
     font-family: 'Audiowide', cursive;
     padding-top: 20px;
     font-size: 40px;
