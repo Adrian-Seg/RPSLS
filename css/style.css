@@ -22,7 +22,7 @@ body {
     justify-content: space-around;
 }
 
-.difficulties, .restart {
+.numOfRounds, .restart {
     font-family: 'Audiowide', cursive;
     padding-top: 20px;
     font-size: 40px;
