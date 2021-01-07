@@ -1,28 +1,6 @@
 const restartBtn = document.getElementById("restartBtn");
 const injectGame = document.getElementById("injectGame");
 
-// const rock = document.getElementById("rock");
-// const paper = document.getElementById("paper");
-// const scissor = document.getElementById("scissor");
-// const lizard = document.getElementById("lizard");
-// const spock = document.getElementById("spock");
-
-// rock.addEventListener('click', function(){
-//     console.log("You chose rock!");
-// });
-// paper.addEventListener('click', function(){
-//     console.log("You chose paper!");
-// });
-// scissor.addEventListener('click', function(){
-//     console.log("You chose scissor!");
-// });
-// lizard.addEventListener('click', function(){
-//     console.log("You chose lizard!");
-// });
-// spock.addEventListener('click', function(){
-//     console.log("You chose spock!");
-// });
-
 restartBtn.addEventListener("click", function () {
     location.reload();
 });
@@ -30,9 +8,6 @@ restartBtn.addEventListener("click", function () {
 function chooseRounds() { }
 
 
-// function getWinner() {
-
-// }
 
 function loadData(url) {
     fetch(url).then((pvp) => {
@@ -75,39 +50,111 @@ function loadData(url) {
                 injectGame.innerHTML = game;
                 setTimeout(() => {
                     // Any game logic will go here
-                    const rock = document.getElementById("rock");
-                    const paper = document.getElementById("paper");
-                    const scissor = document.getElementById("scissor");
-                    const lizard = document.getElementById("lizard");
-                    const spock = document.getElementById("spock");
-                    rock.addEventListener("click", function () {
-                        console.log("You chose rock!");
-                    });
-                    paper.addEventListener("click", function () {
-                        console.log("You chose paper!");
-                    });
-                    scissor.addEventListener("click", function () {
-                        console.log("You chose scissor!");
-                    });
-                    lizard.addEventListener("click", function () {
-                        console.log("You chose lizard!");
-                    });
-                    spock.addEventListener("click", function () {
-                        console.log("You chose spock!");
-                    });
+                    // const rock = document.getElementById("rock");
+                    // const paper = document.getElementById("paper");
+                    // const scissor = document.getElementById("scissor");
+                    // const lizard = document.getElementById("lizard");
+                    // const spock = document.getElementById("spock");
+                    // rock.addEventListener("click", function () {
+                    //     console.log("You chose rock!");
+                    // });
+                    // paper.addEventListener("click", function () {
+                    //     console.log("You chose paper!");
+                    // });
+                    // scissor.addEventListener("click", function () {
+                    //     console.log("You chose scissor!");
+                    // });
+                    // lizard.addEventListener("click", function () {
+                    //     console.log("You chose lizard!");
+                    // });
+                    // spock.addEventListener("click", function () {
+                    //     console.log("You chose spock!");
+                    // });
+                    const selectionButtons = document.querySelectorAll('[data-selection]');
+                    const OPTIONS = [
+                        {
+                            name: 'Rock',
+                            emoji: '✊',
+                            beats: 'Scissors, Lizard'
+                        },
+                        {
+                            name: 'Paper',
+                            emoji: '✋',
+                            beats: 'Rock, Spock'
+                        },
+                        {
+                            name: 'Scissors',
+                            emoji: '✌️',
+                            beats: 'Paper, Lizard'
+                        },
+                        {
+                            name: 'Lizard',
+                            emoji: '🤏',
+                            beats: 'Paper, Spock'
+                        },
+                        {
+                            name: 'Spock',
+                            emoji: '🖖',
+                            beats: 'Rock, Scissors'
+                        },
+                    ]
+                    let p1Points = document.getElementById("p1Points");
+                    let p2Points = document.getElementById("p2Points");
+                    p1Points = 0;
+                    p2Points = 0;
 
-                    // function getPlayerHand() {
-                    //     let playerHand =
+
+                    selectionButtons.forEach(selectionButton => {
+                        selectionButton.addEventListener("click", e => {
+                            const selectionName = selectionButton.dataset.selection;
+                            const selection = OPTIONS.find(selection => selection.name === selectionName);
+                            makeSelection(selection);
+                        })
+                    })
+
+                    function makeSelection(selection) {
+                        const cpuSelection = getCpuHand();
+                        const yourWinner = isWinner(selection, cpuSelection);
+                        const cpuWinner = isWinner(cpuSelection, selection);
+                        console.log(selection);
+                        
+                        // addSelectionResult(cpuSelection, cpuWinner);
+                        // addSelectionResult(selection, yourWinner);
+
+                        if (yourWinner){
+                            p1Points++;
+                        }
+                        if (cpuWinner){
+                            p2Points++;
+                        }
+                        // getCpuHand();
+                    }
+
+                    // function addSelectionResult(selection, winner){
+
                     // }
 
+                    // function addPoint(){
+                    //     if (yourWinner){
+
+                    //     }
+                    //     score.innerText = parseInt(score.innerText) +1;
+                    // }
+
+                    function isWinner(selection, opponentSelection) {
+                        return selection.beats === opponentSelection.name;
+                    }
+                    
                     async function getCpuHand() {
                         let promiseResult = await fetch(
                             "https://csa2020studentapi.azurewebsites.net/rpsls"
                         );
-                        let info = await promiseResult.text();
-                        console.log(info);
+                        let cpuHand = await promiseResult.text();
+                        console.log(cpuHand);
+                        return cpuHand;
                     }
-                    getCpuHand();
+
+                    
 
                 }, 1000);
             }
