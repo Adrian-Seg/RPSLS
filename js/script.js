@@ -46,111 +46,81 @@ function loadData(url) {
                 }, 1000);
             }
             else if (url == "./pages/game.html") {
-                console.log(game);
+                // console.log(game);
                 injectGame.innerHTML = game;
                 setTimeout(() => {
                     // Any game logic will go here
                     // const rock = document.getElementById("rock");
                     // const paper = document.getElementById("paper");
-                    // const scissor = document.getElementById("scissor");
+                    // const scissors = document.getElementById("scissors");
                     // const lizard = document.getElementById("lizard");
                     // const spock = document.getElementById("spock");
+
                     // rock.addEventListener("click", function () {
                     //     console.log("You chose rock!");
+                    //     getCpuHand();
                     // });
                     // paper.addEventListener("click", function () {
                     //     console.log("You chose paper!");
+                    //     getCpuHand();
                     // });
-                    // scissor.addEventListener("click", function () {
-                    //     console.log("You chose scissor!");
+                    // scissors.addEventListener("click", function () {
+                    //     console.log("You chose scissors!");
+                    //     getCpuHand();
                     // });
                     // lizard.addEventListener("click", function () {
                     //     console.log("You chose lizard!");
+                    //     getCpuHand();
                     // });
                     // spock.addEventListener("click", function () {
                     //     console.log("You chose spock!");
+                    //     getCpuHand();
                     // });
+
+
                     const selectionButtons = document.querySelectorAll('[data-selection]');
-                    const OPTIONS = [
-                        {
-                            name: 'Rock',
-                            emoji: '✊',
-                            beats: 'Scissors, Lizard'
-                        },
-                        {
-                            name: 'Paper',
-                            emoji: '✋',
-                            beats: 'Rock, Spock'
-                        },
-                        {
-                            name: 'Scissors',
-                            emoji: '✌️',
-                            beats: 'Paper, Lizard'
-                        },
-                        {
-                            name: 'Lizard',
-                            emoji: '🤏',
-                            beats: 'Paper, Spock'
-                        },
-                        {
-                            name: 'Spock',
-                            emoji: '🖖',
-                            beats: 'Rock, Scissors'
-                        },
-                    ]
+
                     let p1Points = document.getElementById("p1Points");
                     let p2Points = document.getElementById("p2Points");
                     p1Points = 0;
                     p2Points = 0;
 
-
                     selectionButtons.forEach(selectionButton => {
                         selectionButton.addEventListener("click", e => {
                             const selectionName = selectionButton.dataset.selection;
-                            const selection = OPTIONS.find(selection => selection.name === selectionName);
-                            makeSelection(selection);
+
+                            let p1 = selectionName;
+                            let p2 = getCpuHand();
+                            console.log("My Selection: " + selectionName);
+                            // getCpuHand();
+
+                            if (p1 === p2) {
+                                console.log("Tie!")
+                            }
+                            else if (
+                                (p1 === "Rock" && (p2 === "Scissors" || p2 === "Lizard")) ||
+                                (p1 === "Paper" && (p2 === "Rock" || p2 === "Spock")) ||
+                                (p1 === "Scissors" && (p2 === "Paper" || p2 === "Lizard")) ||
+                                (p1 === "Lizard" && (p2 === "Paper" || p2 === "Spock")) ||
+                                (p1 === "Spock" && (p2 === "Rock" || p2 === "Scissors"))
+                            ) {
+                                p1Points++;
+                                console.log("Player 1 wins!");
+                            } else {
+                                p2Points++;
+                                console.log("Player 2 wins!");
+                            }
+                            
                         })
+                        p1Points.innerText = p1Points;
+                        p2Points.innerText = p1Points;
                     })
-
-                    function makeSelection(selection) {
-                        const cpuSelection = getCpuHand();
-                        const yourWinner = isWinner(selection, cpuSelection);
-                        const cpuWinner = isWinner(cpuSelection, selection);
-                        console.log(selection);
-                        
-                        // addSelectionResult(cpuSelection, cpuWinner);
-                        // addSelectionResult(selection, yourWinner);
-
-                        if (yourWinner){
-                            p1Points++;
-                        }
-                        if (cpuWinner){
-                            p2Points++;
-                        }
-                        // getCpuHand();
-                    }
-
-                    // function addSelectionResult(selection, winner){
-
-                    // }
-
-                    // function addPoint(){
-                    //     if (yourWinner){
-
-                    //     }
-                    //     score.innerText = parseInt(score.innerText) +1;
-                    // }
-
-                    function isWinner(selection, opponentSelection) {
-                        return selection.beats === opponentSelection.name;
-                    }
-                    
                     async function getCpuHand() {
                         let promiseResult = await fetch(
                             "https://csa2020studentapi.azurewebsites.net/rpsls"
                         );
                         let cpuHand = await promiseResult.text();
-                        console.log(cpuHand);
+                        console.log("Cpu Hand: " + cpuHand);
                         return cpuHand;
                     }
 
