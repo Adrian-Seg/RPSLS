@@ -10,8 +10,6 @@ restartBtn.addEventListener("click", function () {
     location.reload();
 });
 
-// function chooseRounds() { }
-
 function loadData(url) {
     fetch(url).then((pvp) => {
         pvp.text().then(function (game) {
@@ -53,29 +51,6 @@ function loadData(url) {
                 }, 300);
 
             }
-
-
-            // else if (url == "./pages/difficulty.html") {
-            //     injectGame.innerHTML = game;
-            //     setTimeout(() => {
-            //         let oneRound = document.getElementById("oneRound");
-            //         let fiveRounds = document.getElementById("fiveRounds");
-            //         let sevenRounds = document.getElementById("sevenRounds");
-
-            //         oneRound.addEventListener("click", function () {
-            //             // SET GAME TO 1 SCORE
-            //             loadData("./pages/game.html");
-            //         });
-            //         fiveRounds.addEventListener("click", function () {
-            //             // SET GAME TO 5 SCORE
-            //             loadData("./pages/game.html");
-            //         });
-            //         sevenRounds.addEventListener("click", function () {
-            //             // SET GAME TO 7 SCORE
-            //             loadData("./pages/game.html");
-            //         });
-            //     }, 1000);
-            // }
             else if (url == "./pages/game.html") {
                 injectGame.innerHTML = game;
                 setTimeout(() => {
@@ -108,13 +83,13 @@ function loadData(url) {
                     // });
 
                     const selectionButtons = document.querySelectorAll('[data-selection]');
-
                     let p1Points = document.getElementById("p1Points");
                     let p2Points = document.getElementById("p2Points");
                     p1Points.innerText = p1PointCount;
                     p2Points.innerText = p2PointCount;
-
                     let makeGoAway = document.getElementById("makeGoAway");
+                    let p1Chose = document.getElementById("p1Chose");
+                    let p2Chose = document.getElementById("p2Chose");
 
                     async function getCpuHand(selection) {
                         let promiseResult = await fetch(
@@ -127,11 +102,18 @@ function loadData(url) {
                         let wonRound = document.getElementById("wonRound");
                         let p1 = selectionName;
                         let p2 = cpuHand;
-                        console.log("My Selection: " + selectionName);
+
+                        console.log("My Selection: " + p1);
                         console.log("CPU HAND: " + p2);
 
                         if (p1 === p2) {
+                            p1Chose.innerText = "P1: " + p1;
+                            p2Chose.innerText = "P2: " + p2;
                             wonRound.innerText = "Tie!!";
+                            p1Points.innerText = p1PointCount;
+                            p2Points.innerText = p2PointCount;
+                            p1Chose.classList.remove("d-none");
+                            p2Chose.classList.remove("d-none");
                             wonRound.classList.remove("d-none");
                             console.log("Tie!")
                         }
@@ -144,12 +126,24 @@ function loadData(url) {
                         ) {
                             p1PointCount++;
                             endRound++;
+                            p1Chose.innerText = "P1: " + p1;
+                            p2Chose.innerText = "P2: " + p2;
                             wonRound.innerText = "Player 1 Wins!!";
+                            p1Points.innerText = p1PointCount;
+                            p2Points.innerText = p2PointCount;
+                            p1Chose.classList.remove("d-none");
+                            p2Chose.classList.remove("d-none");
                             wonRound.classList.remove("d-none");
                             console.log("Player 1 wins!");
                         } else {
                             p2PointCount++;
                             endRound++;
+                            p1Chose.innerText = "P1: " + p1;
+                            p2Chose.innerText = "P2: " + p2;
+                            p1Points.innerText = p1PointCount;
+                            p2Points.innerText = p2PointCount;
+                            p1Chose.classList.remove("d-none");
+                            p2Chose.classList.remove("d-none");
                             wonRound.innerText = "Player 2 Wins!!";
                             wonRound.classList.remove("d-none");
                             console.log("Player 2 wins!");
@@ -162,18 +156,18 @@ function loadData(url) {
                             console.log("end game");
                             showWinner();
                         } else {
-                            setTimeout(() =>{
+                            setTimeout(() => {
                                 loadData("./pages/game.html");
-                            }, 2000)
-                            
+                            }, 3000)
+
                         }
 
                     }
 
                     function showWinner() {
                         restartBtn.classList.remove("d-none");
-                        p1Points.innerText = p1PointCount;
-                        p2Points.innerText = p2PointCount;
+                        // p1Points.innerText = p1PointCount;
+                        // p2Points.innerText = p2PointCount;
                         makeGoAway.classList.add("d-none");
                         loadData("./pages/showWinner.html");
                     }
