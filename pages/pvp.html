@@ -1,17 +1,17 @@
 <div class="selections" id="makeGoAway">
     <div class="selection" data-selection="Rock">✊</div>
-    <button class="selection" data-selection="Paper">✋</button>
-    <button class="selection" data-selection="Scissors">✌️</button>
-    <button class="selection" data-selection="Lizard">🤏</button>
-    <button class="selection" data-selection="Spock">🖖</button>
+    <div class="selection" data-selection="Paper">✋</div>
+    <div class="selection" data-selection="Scissors">✌️</div>
+    <div class="selection" data-selection="Lizard">🤏</div>
+    <div class="selection" data-selection="Spock">🖖</div>
 </div>
 
 <div class="results">
-    <div class="player">
+    <div id="p1Q" class="player">
         Player 1:
         <span id="p1Points" class="playerScore"></span>
     </div>
-    <div class="player">
+    <div id="p2Q" class="player">
         Player 2:
         <span id="p2Points" class="playerScore"></span>
     </div>
@@ -19,6 +19,6 @@
 
 <div class="roundResult">
     <p id="wonRound" class="d-none result"></p>
-    <p id="p1Chose" class="d-none winner"></p>
+    <p id="p1Chose" class="d-none winner">P1: ✔️</p>
     <p id="p2Chose" class="d-none winner"></p>
 </div>

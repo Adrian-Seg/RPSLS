@@ -183,19 +183,22 @@ function loadData(url) {
                     const selectionButtons = document.querySelectorAll('[data-selection]');
                     let p1Points = document.getElementById("p1Points");
                     let p2Points = document.getElementById("p2Points");
-                    // p1Points.innerText = p1PointCount;
-                    // p2Points.innerText = p2PointCount;
-
+                    p1Points.innerText = p1PointCount;
+                    p2Points.innerText = p2PointCount;
                     let makeGoAway = document.getElementById("makeGoAway");
                     let p1Chose = document.getElementById("p1Chose");
                     let p2Chose = document.getElementById("p2Chose");
                     let wonRound = document.getElementById("wonRound");
+                    let p1Q = document.getElementById("p1Q");
+                    let p2Q = document.getElementById("p2Q");
+
                     let p1, p2;
 
                     async function getCpuHand(selection) {
-                        
                         if (player1Turn){
                             p1 = selection;
+                            p1Chose.classList.remove("d-none");
+
                         } else {
                             p2 = selection;
                             
@@ -262,48 +265,6 @@ function loadData(url) {
 
                         }
             
-                        // if (p1 === p2) {
-                        //     p1Chose.innerText = "P1: " + p1;
-                        //     p2Chose.innerText = "P2: " + p2;
-                        //     wonRound.innerText = "Tie!!";
-                        //     p1Points.innerText = p1PointCount;
-                        //     p2Points.innerText = p2PointCount;
-                        //     p1Chose.classList.remove("d-none");
-                        //     p2Chose.classList.remove("d-none");
-                        //     wonRound.classList.remove("d-none");
-                        //     console.log("Tie!")
-                        // }
-                        // else if (
-                        //     (p1 === "Rock" && (p2 === "Scissors" || p2 === "Lizard")) ||
-                        //     (p1 === "Paper" && (p2 === "Rock" || p2 === "Spock")) ||
-                        //     (p1 === "Scissors" && (p2 === "Paper" || p2 === "Lizard")) ||
-                        //     (p1 === "Lizard" && (p2 === "Paper" || p2 === "Spock")) ||
-                        //     (p1 === "Spock" && (p2 === "Rock" || p2 === "Scissors"))
-                        // ) {
-                        //     p1PointCount++;
-                        //     endRound++;
-                        //     p1Chose.innerText = "P1: " + p1;
-                        //     p2Chose.innerText = "P2: " + p2;
-                        //     wonRound.innerText = "Player 1 Wins!!";
-                        //     p1Points.innerText = p1PointCount;
-                        //     p2Points.innerText = p2PointCount;
-                        //     p1Chose.classList.remove("d-none");
-                        //     p2Chose.classList.remove("d-none");
-                        //     wonRound.classList.remove("d-none");
-                        //     console.log("Player 1 wins!");
-                        // } else {
-                        //     p2PointCount++;
-                        //     endRound++;
-                        //     p1Chose.innerText = "P1: " + p1;
-                        //     p2Chose.innerText = "P2: " + p2;
-                        //     p1Points.innerText = p1PointCount;
-                        //     p2Points.innerText = p2PointCount;
-                        //     p1Chose.classList.remove("d-none");
-                        //     p2Chose.classList.remove("d-none");
-                        //     wonRound.innerText = "Player 2 Wins!!";
-                        //     wonRound.classList.remove("d-none");
-                        //     console.log("Player 2 wins!");
-                        // }
                     }
             
                     function showWinner() {
