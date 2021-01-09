@@ -1,13 +1,16 @@
 const restartBtn = document.getElementById("restartBtn");
 const injectGame = document.getElementById("injectGame");
 
+let gameScore;
+let endRound = 0;
+let p1PointCount = 0;
+let p2PointCount = 0;
+
 restartBtn.addEventListener("click", function () {
     location.reload();
 });
 
-function chooseRounds() { }
-
-
+// function chooseRounds() { }
 
 function loadData(url) {
     fetch(url).then((pvp) => {
@@ -25,7 +28,7 @@ function loadData(url) {
                         loadData("./pages/pvp.html");
                     });
 
-                }, 1000);
+                }, 300);
             }
             else if (url == "./pages/difficulty.html") {
                 injectGame.innerHTML = game;
@@ -35,18 +38,45 @@ function loadData(url) {
                     let sevenRounds = document.getElementById("sevenRounds");
 
                     oneRound.addEventListener("click", function () {
+                        gameScore = 1;
                         loadData("./pages/game.html");
                     });
                     fiveRounds.addEventListener("click", function () {
+                        gameScore = 3;
                         loadData("./pages/game.html");
                     });
                     sevenRounds.addEventListener("click", function () {
+                        gameScore = 4;
                         loadData("./pages/game.html");
                     });
-                }, 1000);
+
+                }, 300);
+
             }
+
+
+            // else if (url == "./pages/difficulty.html") {
+            //     injectGame.innerHTML = game;
+            //     setTimeout(() => {
+            //         let oneRound = document.getElementById("oneRound");
+            //         let fiveRounds = document.getElementById("fiveRounds");
+            //         let sevenRounds = document.getElementById("sevenRounds");
+
+            //         oneRound.addEventListener("click", function () {
+            //             // SET GAME TO 1 SCORE
+            //             loadData("./pages/game.html");
+            //         });
+            //         fiveRounds.addEventListener("click", function () {
+            //             // SET GAME TO 5 SCORE
+            //             loadData("./pages/game.html");
+            //         });
+            //         sevenRounds.addEventListener("click", function () {
+            //             // SET GAME TO 7 SCORE
+            //             loadData("./pages/game.html");
+            //         });
+            //     }, 1000);
+            // }
             else if (url == "./pages/game.html") {
-                // console.log(game);
                 injectGame.innerHTML = game;
                 setTimeout(() => {
                     // Any game logic will go here
@@ -77,56 +107,75 @@ function loadData(url) {
                     //     getCpuHand();
                     // });
 
-
                     const selectionButtons = document.querySelectorAll('[data-selection]');
 
                     let p1Points = document.getElementById("p1Points");
                     let p2Points = document.getElementById("p2Points");
-                    p1Points = 0;
-                    p2Points = 0;
+                    p1Points.innerText = p1PointCount;
+                    p2Points.innerText = p2PointCount;
+                    
+                    let makeGoAway = document.getElementById("makeGoAway");
 
-                    selectionButtons.forEach(selectionButton => {
-                        selectionButton.addEventListener("click", e => {
-                            const selectionName = selectionButton.dataset.selection;
-
-                            let p1 = selectionName;
-                            let p2 = getCpuHand();
-                            console.log("My Selection: " + selectionName);
-                            // getCpuHand();
-
-                            if (p1 === p2) {
-                                console.log("Tie!")
-                            }
-                            else if (
-                                (p1 === "Rock" && (p2 === "Scissors" || p2 === "Lizard")) ||
-                                (p1 === "Paper" && (p2 === "Rock" || p2 === "Spock")) ||
-                                (p1 === "Scissors" && (p2 === "Paper" || p2 === "Lizard")) ||
-                                (p1 === "Lizard" && (p2 === "Paper" || p2 === "Spock")) ||
-                                (p1 === "Spock" && (p2 === "Rock" || p2 === "Scissors"))
-                            ) {
-                                p1Points++;
-                                console.log("Player 1 wins!");
-                            } else {
-                                p2Points++;
-                                console.log("Player 2 wins!");
-                            }
-                            
-                        })
-                        p1Points.innerText = p1Points;
-                        p2Points.innerText = p1Points;
-                    })
-                    async function getCpuHand() {
+                    async function getCpuHand(selection) {
                         let promiseResult = await fetch(
                             "https://csa2020studentapi.azurewebsites.net/rpsls"
                         );
                         let cpuHand = await promiseResult.text();
-                        console.log("Cpu Hand: " + cpuHand);
-                        return cpuHand;
+
+                        const selectionName = selection;
+
+
+                        let p1 = selectionName;
+                        let p2 = cpuHand;
+                        console.log("My Selection: " + selectionName);
+                        console.log("CPU HAND: " + p2);
+
+                        if (p1 === p2) {
+                            console.log("Tie!")
+                        }
+                        else if (
+                            (p1 === "Rock" && (p2 === "Scissors" || p2 === "Lizard")) ||
+                            (p1 === "Paper" && (p2 === "Rock" || p2 === "Spock")) ||
+                            (p1 === "Scissors" && (p2 === "Paper" || p2 === "Lizard")) ||
+                            (p1 === "Lizard" && (p2 === "Paper" || p2 === "Spock")) ||
+                            (p1 === "Spock" && (p2 === "Rock" || p2 === "Scissors"))
+                        ) {
+                            p1PointCount++;
+                            endRound++;
+                            console.log("Player 1 wins!");
+                        } else {
+                            p2PointCount++;
+                            endRound++;
+                            console.log("Player 2 wins!");
+                        }
+
+
+                        console.log("p1: " + p1PointCount);
+                        console.log("p2: " + p2PointCount);
+
+                        if (p1PointCount === gameScore || p2PointCount === gameScore) {
+                            console.log("end game");
+                            showWinner();
+                        } else {
+                            loadData("./pages/game.html");
+                        }
+
                     }
 
-                    
+                    function showWinner() {
+                        restartBtn.classList.remove("d-none");
+                        p1Points.innerText = p1PointCount;
+                        p2Points.innerText = p2PointCount;
+                        makeGoAway.classList.add("d-none");
+                        loadData("./pages/showWinner.html");
+                    }
 
-                }, 1000);
+                    selectionButtons.forEach(selectionButton => {
+                        selectionButton.addEventListener("click", e => {
+                            getCpuHand(selectionButton.dataset.selection);
+                        })
+                    })
+                }, 300);
             }
         });
     });
