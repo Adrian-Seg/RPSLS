@@ -113,7 +113,7 @@ function loadData(url) {
                     let p2Points = document.getElementById("p2Points");
                     p1Points.innerText = p1PointCount;
                     p2Points.innerText = p2PointCount;
-                    
+
                     let makeGoAway = document.getElementById("makeGoAway");
 
                     async function getCpuHand(selection) {
@@ -124,13 +124,15 @@ function loadData(url) {
 
                         const selectionName = selection;
 
-
+                        let wonRound = document.getElementById("wonRound");
                         let p1 = selectionName;
                         let p2 = cpuHand;
                         console.log("My Selection: " + selectionName);
                         console.log("CPU HAND: " + p2);
 
                         if (p1 === p2) {
+                            wonRound.innerText = "Tie!!";
+                            wonRound.classList.remove("d-none");
                             console.log("Tie!")
                         }
                         else if (
@@ -142,13 +144,16 @@ function loadData(url) {
                         ) {
                             p1PointCount++;
                             endRound++;
+                            wonRound.innerText = "Player 1 Wins!!";
+                            wonRound.classList.remove("d-none");
                             console.log("Player 1 wins!");
                         } else {
                             p2PointCount++;
                             endRound++;
+                            wonRound.innerText = "Player 2 Wins!!";
+                            wonRound.classList.remove("d-none");
                             console.log("Player 2 wins!");
                         }
-
 
                         console.log("p1: " + p1PointCount);
                         console.log("p2: " + p2PointCount);
@@ -157,7 +162,10 @@ function loadData(url) {
                             console.log("end game");
                             showWinner();
                         } else {
-                            loadData("./pages/game.html");
+                            setTimeout(() =>{
+                                loadData("./pages/game.html");
+                            }, 2000)
+                            
                         }
 
                     }
