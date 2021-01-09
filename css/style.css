@@ -12,6 +12,26 @@ body {
     justify-content: center;
 }
 
+/* MAIN PAGE */
+
+.pickOpponent, .numOfRounds {
+    font-family: 'Audiowide', cursive;
+    padding-top: 20px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.restart {
+    font-family: 'Audiowide', cursive;
+    padding-top: 20px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* GAME PAGE */
 .selections {
     display: flex;
     justify-content: center;
@@ -32,7 +52,7 @@ body {
 
 .player {
     font-family: 'Acme', sans-serif;
-    font-size: 45px;
+    font-size: 40px;
 }
 
 .results {
@@ -43,4 +63,18 @@ body {
     justify-items: center;
     align-items: center;
     font-size: 30px;
+}
+
+.playerScore {
+    font-family: 'Acme', sans-serif;
+    font-size: 65px;
+}
+
+/* WINNER PAGE */
+.winner {
+    display: flex;
+    justify-content: center;
+    font-family: 'Acme', sans-serif;
+    font-weight: bold;
+    font-size: 70px;
 }
