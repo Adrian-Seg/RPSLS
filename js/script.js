@@ -101,7 +101,7 @@ function loadData(url) {
                         // PLAYER 1 AND 2 TIE
                         p1Chose.innerText = "Player: " + p1;
                         p2Chose.innerText = "CPU: " + p2;
-                        wonRound.innerText = "Tie!!";
+                        wonRound.innerText = "Tie!";
                         p1Points.innerText = p1PointCount;
                         p2Points.innerText = p2PointCount;
                         p1Chose.classList.remove("d-none");
@@ -123,7 +123,7 @@ function loadData(url) {
                         endRound++;
                         p1Chose.innerText = "Player: " + p1;
                         p2Chose.innerText = "CPU: " + p2;
-                        wonRound.innerText = "Player Wins!!";
+                        wonRound.innerText = "Player won the round!";
                         p1Points.innerText = p1PointCount;
                         p2Points.innerText = p2PointCount;
                         p1Chose.classList.remove("d-none");
@@ -143,7 +143,7 @@ function loadData(url) {
                         p1Chose.classList.remove("d-none");
                         p2Chose.classList.remove("d-none");
                         // wonRound.innerText = "Player 2 Wins!!";
-                        wonRound.innerText = "CPU Wins!!";
+                        wonRound.innerText = "CPU won the round!";
                         wonRound.classList.remove("d-none");
                         nextRound.classList.remove("d-none");
 
@@ -151,7 +151,10 @@ function loadData(url) {
                     }
 
                     // GETS FINAL SCORE AND WINNER
-                    if (p1PointCount === gameScore || p2PointCount === gameScore) {
+                    if (p1PointCount === gameScore) {
+                        showWinner();
+                    }
+                    if (p2PointCount === gameScore){
                         showWinner();
                     }
 
@@ -161,8 +164,17 @@ function loadData(url) {
                     restartBtn.classList.remove("d-none");
                     makeGoAway.classList.add("d-none");
                     nextRound.classList.add("d-none");
-                    
+                    wonRound.innerText = "Player won the game!";
                 }
+
+                function showWinner2() {
+                    restartBtn.classList.remove("d-none");
+                    makeGoAway.classList.add("d-none");
+                    nextRound.classList.add("d-none");
+                    wonRound.innerText = "CPU won the game!";
+                }
+
+
 
                 selectionButtons.forEach(selectionButton => {
                     selectionButton.addEventListener("click", e => {
@@ -209,6 +221,14 @@ function loadData(url) {
                     restartBtn.classList.remove("d-none");
                     makeGoAway.classList.add("d-none");
                     nextRound.classList.add("d-none");
+                    wonRound.innerText = "Player 1 won the game!";
+                }
+
+                function showWinner2() {
+                    restartBtn.classList.remove("d-none");
+                    makeGoAway.classList.add("d-none");
+                    nextRound.classList.add("d-none");
+                    wonRound.innerText = "Player 2 won the game!";
                 }
 
                 async function getCpuHand(selection) {
@@ -224,7 +244,7 @@ function loadData(url) {
                     function roundWinner() {
                         if (p1 === p2) {
                             // PLAYER 1 AND PLAYER 2 TIE
-                            wonRound.innerText = "Tie!!";
+                            wonRound.innerText = "Tie!";
                             p1Points.innerText = p1PointCount;
                             p2Points.innerText = p2PointCount;
                             p1Chose.classList.remove("d-none");
@@ -246,7 +266,7 @@ function loadData(url) {
                             endRound++;
                             p1Chose.innerText = "P1: " + p1;
                             p2Chose.innerText = "P2: " + p2;
-                            wonRound.innerText = "Player 1 Wins!!";
+                            wonRound.innerText = "Player 1 won the round!";
                             p1Points.innerText = p1PointCount;
                             p2Points.innerText = p2PointCount;
                             p1Chose.classList.remove("d-none");
@@ -261,7 +281,7 @@ function loadData(url) {
                             endRound++;
                             p1Chose.innerText = "P1: " + p1;
                             p2Chose.innerText = "P2: " + p2;
-                            wonRound.innerText = "Player 2 Wins!!";
+                            wonRound.innerText = "Player 2 won the round!";
                             p1Points.innerText = p1PointCount;
                             p2Points.innerText = p2PointCount;
                             p1Chose.classList.remove("d-none");
@@ -273,8 +293,11 @@ function loadData(url) {
                         }
 
                         // GETS FINAL SCORE AND WINNER
-                        if (p1PointCount === gameScore || p2PointCount === gameScore) {
+                        if (p1PointCount === gameScore) {
                             showWinner();
+                        }
+                        if (p2PointCount === gameScore) {
+                            showWinner2();
                         }
 
                     }
