@@ -50,11 +50,10 @@ body {
     transform: scale(1.2);
 }
 
-.player {
-    font-family: 'Acme', sans-serif;
-    font-size: 40px;
+.center{
+    display:flex;
+    align-self: center;
 }
-
 .results {
     margin-top: 20px;
     display: grid;
@@ -65,16 +64,27 @@ body {
     font-size: 30px;
 }
 
-.playerScore {
+.player {
     font-family: 'Acme', sans-serif;
-    font-size: 65px;
+    font-size: 45px;
 }
 
-/* WINNER PAGE */
+.playerScore {
+    font-family: 'Acme', sans-serif;
+    font-size: 75px;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    font-family: 'Acme', sans-serif;
+    font-weight: bold;
+    font-size: 85px;
+}
 .winner {
     display: flex;
     justify-content: center;
     font-family: 'Acme', sans-serif;
     font-weight: bold;
-    font-size: 70px;
+    font-size: 50px;
 }
