@@ -50,6 +50,10 @@ body {
     transform: scale(1.2);
 }
 
+.center{
+    display:flex;
+    align-self: center;
+}
 .results {
     margin-top: 20px;
     display: grid;
@@ -62,7 +66,7 @@ body {
 
 .player {
     font-family: 'Acme', sans-serif;
-    font-size: 50px;
+    font-size: 45px;
 }
 
 .playerScore {
