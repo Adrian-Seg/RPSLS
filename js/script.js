@@ -108,6 +108,8 @@ function loadData(url) {
                         p2Chose.classList.remove("d-none");
                         wonRound.classList.remove("d-none");
                         nextRound.classList.remove("d-none");
+
+                        makeGoAway.classList.add("d-none");
                     }
                     else if (
                         (p1 === "Rock" && (p2 === "Scissors" || p2 === "Lizard")) ||
@@ -128,6 +130,8 @@ function loadData(url) {
                         p2Chose.classList.remove("d-none");
                         wonRound.classList.remove("d-none");
                         nextRound.classList.remove("d-none");
+
+                        makeGoAway.classList.add("d-none");
                     } else {
                         // PLAYER 2 WINS ROUND
                         p2PointCount++;
@@ -142,18 +146,14 @@ function loadData(url) {
                         wonRound.innerText = "CPU Wins!!";
                         wonRound.classList.remove("d-none");
                         nextRound.classList.remove("d-none");
+
+                        makeGoAway.classList.add("d-none");
                     }
 
                     // GETS FINAL SCORE AND WINNER
                     if (p1PointCount === gameScore || p2PointCount === gameScore) {
                         showWinner();
                     }
-                    // else {
-                    //     setTimeout(() => {
-                    //         loadData("./pages/game.html");
-                    //     }, 3000)
-
-                    // }
 
                 }
 
@@ -161,7 +161,7 @@ function loadData(url) {
                     restartBtn.classList.remove("d-none");
                     makeGoAway.classList.add("d-none");
                     nextRound.classList.add("d-none");
-                    loadData("./pages/showWinner.html");
+                    
                 }
 
                 selectionButtons.forEach(selectionButton => {
@@ -209,7 +209,6 @@ function loadData(url) {
                     restartBtn.classList.remove("d-none");
                     makeGoAway.classList.add("d-none");
                     nextRound.classList.add("d-none");
-                    loadData("./pages/showWinner.html");
                 }
 
                 async function getCpuHand(selection) {
@@ -232,6 +231,8 @@ function loadData(url) {
                             p2Chose.classList.remove("d-none");
                             wonRound.classList.remove("d-none");
                             nextRound.classList.remove("d-none");
+
+                            makeGoAway.classList.add("d-none");
                         }
                         else if (
                             (p1 === "Rock" && (p2 === "Scissors" || p2 === "Lizard")) ||
@@ -252,6 +253,8 @@ function loadData(url) {
                             p2Chose.classList.remove("d-none");
                             wonRound.classList.remove("d-none");
                             nextRound.classList.remove("d-none");
+
+                            makeGoAway.classList.add("d-none");
                         } else {
                             // PLAYER 2 WINS ROUND
                             p2PointCount++;
@@ -265,6 +268,8 @@ function loadData(url) {
                             p2Chose.classList.remove("d-none");
                             wonRound.classList.remove("d-none");
                             nextRound.classList.remove("d-none");
+
+                            makeGoAway.classList.add("d-none");
                         }
 
                         // GETS FINAL SCORE AND WINNER
