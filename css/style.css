@@ -88,3 +88,12 @@ body {
     font-weight: bold;
     font-size: 50px;
 }
+
+/* Difficulties page */
+.instructions {
+    display: flex;
+    justify-content: center;
+    font-family: 'Acme', sans-serif;
+    /* font-weight: bold; */
+    font-size: 45px;
+}
